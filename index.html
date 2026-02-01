@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/jpeg" href="image_5d187b.jpg">
+<link rel="icon" type="image/jpeg" href="image_5d187b.jpg?v=1">
 <title>Ek Faisla | Hamari Kahani 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -265,7 +265,15 @@ canvas#particles { position: fixed; inset: 0; pointer-events: none; z-index: 100
   </div>
 </div>
 
+
+
 <script>
+
+const password = prompt("Enter the secret code to enter our story:");
+if (password !== "18 August") { 
+    document.body.innerHTML = "<h1>Access Denied.</h1>";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const views = document.querySelectorAll(".view");
     const noBtn = document.getElementById("no");
