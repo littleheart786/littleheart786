@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ek Faisla | For My Sweetheart 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Libre+Baskerville&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg: #faf7f2;
+  --ink: #2f2a26;
+  --muted: #6b625c;
+  --accent: #8b5e3c;
+  --rose: #e63946;
+  --glass: rgba(255, 255, 255, 0.7);
+}
+
+/* Custom Heart Cursor */
+*{
+  margin: 0; padding: 0; box-sizing: border-box;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%238b5e3c'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
+}
+
+body{
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Libre Baskerville', serif;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background Atmosphere */
+.floating-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 50%, #fff 0%, #f7f0e8 100%);
+}
+
+.view{
+  min-height: 100vh;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  animation: slideUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.view.active{ display: flex; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.box{
+  max-width: 780px;
+  width: 100%;
+  text-align: center;
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  padding: 60px 40px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 30px 60px rgba(139, 94, 60, 0.08);
+  position: relative;
+}
+
+h1{
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2rem;
+  font-weight: 500;
+  margin-bottom: 25px;
+  color: var(--ink);
+}
+
+p{
+  font-size: 1.15rem;
+  line-height: 2.1;
+  color: var(--muted);
+  margin: 26px 0;
+}
+
+.highlight {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+/* Button Styling */
+button {
+  margin-top: 40px;
+  padding: 18px 48px;
+  border-radius: 50px;
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--accent);
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+button:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(139, 94, 60, 0.15);
+}
+
+/* Decision View Actions */
+.actions {
+  margin-top: 50px;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+#yes {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: white;
+}
+
+#no {
+  background: #f0f0f0;
+  border-color: #ddd;
+  color: #aaa;
+  position: fixed; /* For fleeing logic */
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+canvas#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    h1 { font-size: 2.4rem; }
+    p { font-size: 1rem; }
+    .box { padding: 40px 20px; border-radius: 30px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="floating-bg"></div>
+<canvas id="particles"></canvas>
+
+<div class="view active" id="v1">
+  <div class="box">
+    <h1>Ek Baat Kehni Thi</h1>
+    <p>Yeh kisi jaldi ka paighaam nahi.  
+    Bas ek baat jo main theek tareeqay se kehna chahta tha, <span class="highlight">sweetheart</span>.</p>
+    <button data-next="v2">Parho</button>
+  </div>
+</div>
+
+<div class="view" id="v2">
+  <div class="box">
+    <p>
+      Kuch waqt pehle humare darmiyan jo hua,  
+      uske baad main ne khud ko thora peeche rakha.
+    </p>
+    <p>
+      Reaction se zyada,  
+      <span class="highlight">reflection</span> choose ki.
+    </p>
+    <button data-next="v3">Aage</button>
+  </div>
+</div>
+
+<div class="view" id="v3">
+  <div class="box">
+    <p>
+      Is dauraan main ne sirf situation nahi,  
+      <span class="highlight">tumhein</span> bhi dobara dekha.
+    </p>
+    <p>
+      Tumhara tareeqa baat karne ka.  
+      Tumhari khamoshi.  
+      Tumhara balance.
+    </p>
+    <button data-next="v4">Aur</button>
+  </div>
+</div>
+
+<div class="view" id="v4">
+  <div class="box">
+    <p>
+      Tum educated ho, lekin show-off nahi.  
+      Confident ho, lekin overpowering nahi.
+    </p>
+    <p>
+      Tumhari sab se strong baat yeh hai  
+      ke tum cheezon ko <span class="highlight">handle</span> karti ho,  
+      dramatize nahi.
+    </p>
+    <button data-next="v5">Aage</button>
+  </div>
+</div>
+
+<div class="view" id="v5">
+  <div class="box">
+    <p>
+      Aur yahin mujhe clarity mili.
+    </p>
+    <p>
+      Ke agar main kisi ke saath future imagine kar sakta hoon,  
+      toh woh tum ho —  
+      <span class="highlight">tumhari personality</span> ke saath,  
+      sirf feelings ke saath nahi.
+    </p>
+    <button data-next="v6">Ek Faisla</button>
+  </div>
+</div>
+
+<div class="view" id="v6">
+  <div class="box">
+    <h1>Seedha Faisla</h1>
+    <p>
+      Main tumhein dobara choose kar raha hoon.  
+      Soch samajh kar.  
+      Poore hosh ke saath.
+    </p>
+    <p class="highlight">Will you be my Valentine... today and forever?</p>
+    
+    <div class="actions">
+      <button id="yes">Haan 💖</button>
+      <button id="no">Nahi 🙈</button>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v7">
+  <div class="box">
+    <p>
+      Thank you.  
+      Yeh jawab meri nazar mein bohot qeemti hai.
+    </p>
+    <p>
+      Main wada karta hoon ke cheezon ko  
+      zyada samajh ke,  
+      zyada <span class="highlight">ehtiyaat</span> se handle karoon ga.
+    </p>
+    <button data-next="v8">Aage</button>
+  </div>
+</div>
+
+<div class="view" id="v8">
+  <div class="box">
+    <h1>Ek Naya Safha</h1>
+    <p>
+      Perfect nahi.  
+      Lekin honest.
+    </p>
+    <p>
+      Agar tum mere saath ho,  
+      toh main bhi poori tarah saath hoon.
+    </p>
+    <p class="highlight" style="margin-top:40px;">
+      Little heart — shukriya. 💕
+    </p>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const views = document.querySelectorAll(".view");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    // --- Navigation Logic ---
+    function show(id) {
+        views.forEach(v => v.classList.remove("active"));
+        const target = document.getElementById(id);
+        target.classList.add("active");
+
+        // Initial positioning for NO button when V6 loads
+        if (id === "v6") {
+            const r = yesBtn.getBoundingClientRect();
+            noBtn.style.left = (r.right + 40) + "px";
+            noBtn.style.top = r.top + "px";
+        }
+    }
+
+    document.querySelectorAll("[data-next]").forEach(b => {
+        b.addEventListener("click", e => show(e.target.dataset.next));
+    });
+
+    yesBtn.addEventListener("click", () => {
+        show("v7");
+        startSuccessEffect();
+    });
+
+    // --- Intelligent Fleeing Logic ---
+    const moveNo = () => {
+        const padding = 50;
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding * 2) + padding;
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding * 2) + padding;
+        
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+        
+        const hints = ["Soch lo? 🧐", "Nahi sweetheart! 💕", "Try again 😜", "Not allowed! 🙈"];
+        noBtn.innerText = hints[Math.floor(Math.random() * hints.length)];
+    };
+
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        moveNo();
+    });
+
+    // --- Cinematic Success Particles ---
+    function startSuccessEffect() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let pts = [];
+        const colors = ['#8b5e3c', '#e63946', '#fbc4ab', '#2f2a26'];
+
+        for(let i=0; i<120; i++) {
+            pts.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 4 + 2,
+                vy: Math.random() * 2 + 1,
+                vx: Math.random() * 2 - 1,
+                c: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pts.forEach(p => {
+                ctx.fillStyle = p.c;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+                p.y += p.vy;
+                p.x += p.vx;
+                if (p.y > canvas.height) p.y = -10;
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    }
+});
+</script>
+
+</body>
+</html>
