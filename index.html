@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ek Faisla | For My Sweetheart 💖</title>
+<title>Ek Faisla | Hamari Kahani 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Libre+Baskerville&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
@@ -14,10 +14,9 @@
   --muted: #6b625c;
   --accent: #8b5e3c;
   --rose: #e63946;
-  --glass: rgba(255, 255, 255, 0.7);
+  --glass: rgba(255, 255, 255, 0.85);
 }
 
-/* Custom Heart Cursor */
 *{
   margin: 0; padding: 0; box-sizing: border-box;
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%238b5e3c'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
@@ -29,44 +28,42 @@ body{
   font-family: 'Libre Baskerville', serif;
   overflow: hidden;
   height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Background Atmosphere */
 .floating-bg {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
+    position: fixed; inset: 0; z-index: -1;
     background: radial-gradient(circle at 50% 50%, #fff 0%, #f7f0e8 100%);
 }
 
 .view{
-  min-height: 100vh;
-  width: 100%;
+  position: absolute;
+  inset: 0;
   display: none;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
-  animation: slideUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  padding: 20px;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
 .view.active{ display: flex; }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); filter: blur(5px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
 }
 
 .box{
-  max-width: 780px;
+  max-width: 800px;
   width: 100%;
   text-align: center;
   background: var(--glass);
   backdrop-filter: blur(15px);
-  padding: 60px 40px;
-  border-radius: 50px;
+  padding: 50px 40px;
+  border-radius: 40px;
   border: 1px solid rgba(255,255,255,0.8);
   box-shadow: 0 30px 60px rgba(139, 94, 60, 0.08);
   position: relative;
@@ -74,17 +71,17 @@ body{
 
 h1{
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3.2rem;
+  font-size: 2.5rem;
   font-weight: 500;
-  margin-bottom: 25px;
-  color: var(--ink);
+  margin-bottom: 15px;
+  line-height: 1.2;
 }
 
-p{
-  font-size: 1.15rem;
-  line-height: 2.1;
+p {
+  font-size: 1rem;
+  line-height: 1.8;
   color: var(--muted);
-  margin: 26px 0;
+  margin: 15px 0;
 }
 
 .highlight {
@@ -92,68 +89,51 @@ p{
   font-style: italic;
   color: var(--accent);
   font-weight: 600;
-  font-size: 1.3rem;
 }
 
-/* Button Styling */
+.date-stamp {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
 button {
-  margin-top: 40px;
-  padding: 18px 48px;
+  margin-top: 25px;
+  padding: 14px 38px;
   border-radius: 50px;
   border: 1px solid var(--accent);
   background: none;
   color: var(--accent);
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 1px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-button:hover {
-  background: var(--accent);
-  color: white;
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(139, 94, 60, 0.15);
+button:hover { background: var(--accent); color: white; transform: translateY(-3px); }
+
+.actions { 
+    margin-top: 30px; 
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+    width: 100%;
+    height: 60px; /* Space for buttons */
 }
 
-/* Decision View Actions */
-.actions {
-  margin-top: 50px;
-  min-height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-}
+#yes { background: var(--rose); border-color: var(--rose); color: white; z-index: 10; }
+#no { background: #eee; border-color: #ddd; color: #999; position: fixed; z-index: 5; }
 
-#yes {
-  background: var(--rose);
-  border-color: var(--rose);
-  color: white;
-}
+canvas#particles { position: fixed; inset: 0; pointer-events: none; z-index: 1000; }
 
-#no {
-  background: #f0f0f0;
-  border-color: #ddd;
-  color: #aaa;
-  position: fixed; /* For fleeing logic */
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-canvas#particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1000;
-}
-
-/* Mobile Responsiveness */
 @media (max-width: 480px) {
-    h1 { font-size: 2.4rem; }
-    p { font-size: 1rem; }
-    .box { padding: 40px 20px; border-radius: 30px; }
+    h1 { font-size: 2rem; }
+    p { font-size: 0.9rem; }
+    .box { padding: 30px 20px; }
 }
 </style>
 </head>
@@ -166,67 +146,37 @@ canvas#particles {
 <div class="view active" id="v1">
   <div class="box">
     <h1>Ek Baat Kehni Thi</h1>
-    <p>Yeh kisi jaldi ka paighaam nahi.  
-    Bas ek baat jo main theek tareeqay se kehna chahta tha, <span class="highlight">sweetheart</span>.</p>
+    <p>Yeh kisi jaldi ka paighaam nahi. Bas ek baat jo main theek tareeqay se kehna chahta tha, <span class="highlight">sweetheart</span>.</p>
     <button data-next="v2">Parho</button>
   </div>
 </div>
 
 <div class="view" id="v2">
   <div class="box">
-    <p>
-      Kuch waqt pehle humare darmiyan jo hua,  
-      uske baad main ne khud ko thora peeche rakha.
-    </p>
-    <p>
-      Reaction se zyada,  
-      <span class="highlight">reflection</span> choose ki.
-    </p>
+    <p>Kuch waqt pehle humare darmiyan jo hua, uske baad main ne khud ko thora peeche rakha.</p>
+    <p>Reaction se zyada, <span class="highlight">reflection</span> choose ki. Main ne situation se zyada "humein" samjha.</p>
     <button data-next="v3">Aage</button>
   </div>
 </div>
 
 <div class="view" id="v3">
   <div class="box">
-    <p>
-      Is dauraan main ne sirf situation nahi,  
-      <span class="highlight">tumhein</span> bhi dobara dekha.
-    </p>
-    <p>
-      Tumhara tareeqa baat karne ka.  
-      Tumhari khamoshi.  
-      Tumhara balance.
-    </p>
+    <p>Is dauraan main ne <span class="highlight">tumhein</span> bhi dobara dekha. Tumhara tareeqa baat karne ka. Tumhari khamoshi. Tumhara balance.</p>
     <button data-next="v4">Aur</button>
   </div>
 </div>
 
 <div class="view" id="v4">
   <div class="box">
-    <p>
-      Tum educated ho, lekin show-off nahi.  
-      Confident ho, lekin overpowering nahi.
-    </p>
-    <p>
-      Tumhari sab se strong baat yeh hai  
-      ke tum cheezon ko <span class="highlight">handle</span> karti ho,  
-      dramatize nahi.
-    </p>
+    <p>Tum educated ho, lekin show-off nahi. Confident ho, lekin overpowering nahi.</p>
+    <p>Tumhari sab se strong baat yeh hai ke tum cheezon ko <span class="highlight">handle</span> karti ho, dramatize nahi.</p>
     <button data-next="v5">Aage</button>
   </div>
 </div>
 
 <div class="view" id="v5">
   <div class="box">
-    <p>
-      Aur yahin mujhe clarity mili.
-    </p>
-    <p>
-      Ke agar main kisi ke saath future imagine kar sakta hoon,  
-      toh woh tum ho —  
-      <span class="highlight">tumhari personality</span> ke saath,  
-      sirf feelings ke saath nahi.
-    </p>
+    <p>Aur yahin mujhe clarity mili. Ke agar main kisi ke saath future imagine kar sakta hoon, toh woh tum ho — <span class="highlight">tumhari personality</span> ke saath, sirf feelings ke saath nahi.</p>
     <button data-next="v6">Ek Faisla</button>
   </div>
 </div>
@@ -234,13 +184,8 @@ canvas#particles {
 <div class="view" id="v6">
   <div class="box">
     <h1>Seedha Faisla</h1>
-    <p>
-      Main tumhein dobara choose kar raha hoon.  
-      Soch samajh kar.  
-      Poore hosh ke saath.
-    </p>
+    <p>Main tumhein dobara choose kar raha hoon. Soch samajh kar. Poore hosh ke saath.</p>
     <p class="highlight">Will you be my Valentine... today and forever?</p>
-    
     <div class="actions">
       <button id="yes">Haan 💖</button>
       <button id="no">Nahi 🙈</button>
@@ -250,15 +195,7 @@ canvas#particles {
 
 <div class="view" id="v7">
   <div class="box">
-    <p>
-      Thank you.  
-      Yeh jawab meri nazar mein bohot qeemti hai.
-    </p>
-    <p>
-      Main wada karta hoon ke cheezon ko  
-      zyada samajh ke,  
-      zyada <span class="highlight">ehtiyaat</span> se handle karoon ga.
-    </p>
+    <p>Thank you. Yeh jawab meri nazar mein bohot qeemti hai. Main wada karta hoon ke cheezon ko zyada samajh ke, zyada <span class="highlight">ehtiyaat</span> se handle karoon ga.</p>
     <button data-next="v8">Aage</button>
   </div>
 </div>
@@ -266,17 +203,63 @@ canvas#particles {
 <div class="view" id="v8">
   <div class="box">
     <h1>Ek Naya Safha</h1>
-    <p>
-      Perfect nahi.  
-      Lekin honest.
-    </p>
-    <p>
-      Agar tum mere saath ho,  
-      toh main bhi poori tarah saath hoon.
-    </p>
-    <p class="highlight" style="margin-top:40px;">
-      Little heart — shukriya. 💕
-    </p>
+    <p>Perfect nahi. Lekin honest. Agar tum mere saath ho, toh main bhi poori tarah saath hoon.</p>
+    <p class="highlight">Little heart — shukriya. 💕</p>
+    <button data-next="v9" style="background: var(--accent); color:white;">Our Nostalgic Highlights ✨</button>
+  </div>
+</div>
+
+<div class="view" id="v9">
+  <div class="box">
+    <span class="date-stamp">July 2023 - The Shell</span>
+    <p>Hum office colleagues thay. Main apne shell mein band, khud se bhi kam baat karne wala nerd. Aur tum, freely yahan wahan ghoomti hui.</p>
+    <p>Phir tum ne <span class="highlight">Hijab pehna</span>. Us din mera heart attract hua aur main ne dua ki ke tum hamesha isi raste pe raho. Mujhe nahi pata tha main kiske liye dua kar raha hoon, bas dil se nikli thi.</p>
+    <button data-next="v10">Our Coffee Days</button>
+  </div>
+</div>
+
+<div class="view" id="v10">
+  <div class="box">
+    <span class="date-stamp">The Bond</span>
+    <p>Floors shift huay, aur tumhari presence meri life ka hissa ban gayi. Mere decisions ko support karna, coffee laa dena ☕.</p>
+    <p>Career-focused banda tha main, commitment se door. Lekin tumhara pyaar itna strong tha ke meri saari planning <span class="highlight">"paani mein gai chapak."</span></p>
+    <button data-next="v11">The Trip & Soft Side</button>
+  </div>
+</div>
+
+<div class="view" id="v11">
+  <div class="box">
+    <span class="date-stamp">Privileged Access</span>
+    <p>Us trip par tumne mera control dekha, meri limits dekhi. Tumne decide kar liya ke main hi tumhare liye sahi hoon.</p>
+    <p>Maine affection ke meanings tumse seekhay. Maine confirm kiya, samjha, aur phir August mein main ne <span class="highlight">YESSS</span> keh diya bina kuch soche.</p>
+    <button data-next="v12">Love Trainer</button>
+  </div>
+</div>
+
+<div class="view" id="v12">
+  <div class="box">
+    <span class="date-stamp">6 Months of Us</span>
+    <p>Main jo red lines ka supporter tha, tumhare liye har line cross karta gaya. Rickshaw mein concert se aatay huay humara pehla kiss... itna pure, itna quick.</p>
+    <p>Ab mujhe realize hota hai ke meri partner sirf meri love nahi, meri <span class="highlight">Love Trainer</span> ban chuki hai 😄❤️.</p>
+    <button data-next="v13">New Year Reflection</button>
+  </div>
+</div>
+
+<div class="view" id="v13">
+  <div class="box">
+    <span class="date-stamp">New Year 2026</span>
+    <p>Tumne kaha tha tum mujhse darti thi kyun ke main bohot serious aur "point-to-point" tha.</p>
+    <p>Lekin tumhari "little courage" ne mere pookiest side ko unlock kar diya. Ab main wada karta hoon ke humara future strong ho, Allah ke raste par chal kar hum <span class="highlight">Nikah</span> tak jayenge.</p>
+    <button data-next="v14">Final Note</button>
+  </div>
+</div>
+
+<div class="view" id="v14">
+  <div class="box">
+    <h1>Safar Jari Hai...</h1>
+    <p>Tum meri "dua," meri "mohabbat," aur meri sab se khoobsurat kahani ho. Thori cry baby ho, lekin meri brown girl ho.</p>
+    <p class="highlight" style="font-size: 1.4rem;">Happy Revival of Us, Janu. 💜</p>
+    <p style="font-size: 0.8rem; margin-top: 20px;">I love you deeply and forever.</p>
   </div>
 </div>
 
@@ -288,17 +271,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
 
-    // --- Navigation Logic ---
     function show(id) {
         views.forEach(v => v.classList.remove("active"));
         const target = document.getElementById(id);
         target.classList.add("active");
+        
+        // Reset scroll position for new slide
+        // const box = target.querySelector('.box');
+        // if(box) box.scrollTop = 0;
 
-        // Initial positioning for NO button when V6 loads
+        // Position NO button relative to YES button only on V6
         if (id === "v6") {
             const r = yesBtn.getBoundingClientRect();
-            noBtn.style.left = (r.right + 40) + "px";
+            noBtn.style.left = (r.right + 20) + "px";
             noBtn.style.top = r.top + "px";
+            noBtn.style.display = "block";
+        } else {
+            noBtn.style.display = "none";
         }
     }
 
@@ -311,53 +300,41 @@ document.addEventListener("DOMContentLoaded", () => {
         startSuccessEffect();
     });
 
-    // --- Intelligent Fleeing Logic ---
     const moveNo = () => {
-        const padding = 50;
+        const padding = 60;
         const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding * 2) + padding;
         const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding * 2) + padding;
-        
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
-        
-        const hints = ["Soch lo? 🧐", "Nahi sweetheart! 💕", "Try again 😜", "Not allowed! 🙈"];
-        noBtn.innerText = hints[Math.floor(Math.random() * hints.length)];
+        const msgs = ["Soch lo? 🧐", "Nahi sweetheart! 💕", "Try again 😜", "Not allowed! 🙈"];
+        noBtn.innerText = msgs[Math.floor(Math.random()*msgs.length)];
     };
 
     noBtn.addEventListener("mouseenter", moveNo);
-    noBtn.addEventListener("touchstart", (e) => {
-        e.preventDefault();
-        moveNo();
-    });
+    noBtn.addEventListener("touchstart", e => { e.preventDefault(); moveNo(); });
 
-    // --- Cinematic Success Particles ---
     function startSuccessEffect() {
-        canvas.width = window.innerWidth;
+        canvas.width = window.innerWidth; 
         canvas.height = window.innerHeight;
         let pts = [];
         const colors = ['#8b5e3c', '#e63946', '#fbc4ab', '#2f2a26'];
-
-        for(let i=0; i<120; i++) {
+        for(let i=0; i<100; i++){
             pts.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 4 + 2,
-                vy: Math.random() * 2 + 1,
-                vx: Math.random() * 2 - 1,
-                c: colors[Math.floor(Math.random() * colors.length)]
+                x: Math.random()*canvas.width, 
+                y: Math.random()*canvas.height,
+                r: Math.random()*3+2, 
+                vy: Math.random()*2+1, 
+                vx: Math.random()*2-1,
+                c: colors[Math.floor(Math.random()*colors.length)]
             });
         }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function draw(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
             pts.forEach(p => {
-                ctx.fillStyle = p.c;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fill();
-                p.y += p.vy;
-                p.x += p.vx;
-                if (p.y > canvas.height) p.y = -10;
+                ctx.fillStyle = p.c; 
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+                p.y += p.vy; p.x += p.vx; 
+                if(p.y > canvas.height) p.y = -10;
             });
             requestAnimationFrame(draw);
         }
